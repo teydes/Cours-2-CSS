@@ -1,0 +1,21 @@
+100vh : tu fais 100% de la hauteur de taille de l'ecran de l'utilisateur.
+calc() : permet de faire le calcul de plusieurs données /* Fonction à maitriser*/
+Before et after : permettent d'accoler à une balise HTML un élément avant et après qui nous permettent d'aller où on veut et faire cequ'on veut. C'est un pseudo .
+Les fonts on modifie la tailleavec les rem.
+les grids peuventr aider à répartir les choses rès précisement en colonnes
+linear-grading ( direction - 135degrés, couleur +%, couleur+% )
+
+** Pour ajouter l'ombre à une forme à l'intérieur d'une box, il faut passer par son parent et utiliser une propriété différente.
+Pour centrer un élément dans une box, il faut que le parent soit en grid. avec place-self: .
+Généralement pour centre en absolute: top 50% et left 50%
+Line-height ; gère l'ecartement entre les lignes
+
+input[type="checkbox"]:checked + label {} = avec le label qui suit.
+input[type="checkbox"]:checked ~ label {} = tous les labels qui suivent.
+display /* a reviser */
+
+*** Si tu as un élément en absolute, il faut lui mettre des frontières
+nth-child : enieme enfant.
+
+Pour trouver le label qui est le 4 eme enfant ; tu comptes 1label + 1input
+

@@ -1,0 +1,304 @@
+:root { /* ¨Permet de définir les couleurs qu'on veut utliser*/
+    --color1: #ede4d0;
+    --color2: pink;
+    --color3: #393b4b;
+    --color4: rgb(18, 19, 19);
+}
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box; /* Permet aux éléments dans les boxes de bien se comporter*/
+}
+
+body {
+    background: url(./bg.jpg) center/cover;
+    height:100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--color1); /* var permet d'utiliser la couleur définie*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card {
+    background: rgba(0,0,0,.507);
+    width: calc(100% - 50px);
+    padding:20px 20px 6px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,.521);
+    border-radius: 5px;
+    backdrop-filter: blur(5px) /* Augmente le flou sous une image*/
+}
+
+.card:before {   /* Il doit generalement avoir un content */
+    content: "\2605";
+    position: absolute;
+    right: 10px;
+    top:14px;
+    font-size: 2.4rem;
+}
+
+h1 {
+    margin-bottom: 24px;
+    position: relative; /* par rapport à son parent*/
+}
+
+h1::after { /* Pour créer un after : 1- content 2- position:absolute*/
+    content: "";
+    position: absolute;
+    background: var(--color2);
+    height: 1px;
+    width: 100%;
+    bottom: -14px;
+    left: 50%;
+    /* Animation création d'une barre */
+    transform: translateX(-50%) scaleX(0);
+    animation: h1anim 6s ease-in-out forwards; /* Tu apparais et tu reste à ta position finale - forwards*/
+    transform-origin: center; /* Origine de l'animation */
+}
+
+@keyframes h1anim {
+    to {            /* to ou la valeur en % */
+        transform: translateX(-50%) scaleX(1); /* tu disparais du scale . Et entre le 0 et le 1 , u fais une aniamtion */
+    }
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.polygon-container { /* Parent de Polygon */
+    filter: drop-shadow(-1px 6px 3px var(--color2)); /* Le 2EME élément à 76px fait l'ombre complete au lieu de 6px*/
+    /* Mettre le parent en grid*/
+    place-self: center left;
+}
+
+.polygon {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    background: linear-gradient(135deg, var(--color2), var(--color1) 100%);
+    height: 100px;
+    width: 100px;
+}
+
+.polygon:after {
+    content: "Un texte";
+    position: absolute;
+    color: var(--color2);
+    background: var(--color4);
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%) rotate(344deg); /* transform corrige les 50% vers le haut et vers la gauche pour centrer l'élément*/
+    width: 90px;
+    text-align: center;
+}
+
+p {
+    line-height: 26px;
+    margin: 20px 0;
+    /* Permett de limiter le nombre de lignes à afficher*/
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-align: justify;
+}
+
+p::selection { /* Changer la couleur de selection du texte*/
+    background: var(--color2);
+    color: var(--color3);
+}
+
+.checkbox-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0 30px;
+    perspective: 40px;
+}
+
+input[type="checkbox"]{ /* Les carrés disparaissent */
+    display: none;
+}
+input[type="checkbox"]:checked + label{
+    background: var(--color2);
+    color: var(--color3);
+    transform: scale(1.1); /* Echelle - Tu grossis de 1.05*/
+    filter: brightness(120%); /* Augmenter la luminosité sur un élément */
+}
+label {
+    cursor: pointer;
+    border: 1px solid var(--color1);
+    background: var(--color3);
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.2s;
+    user-select: none; /* L'utilisaeur ne peut pas selectionner le texte */
+}
+
+label:first-of-type:hover { /* Je veux que mon 1er label ait  une animation quand je le quitte */
+    animation: label1 1s infinite linear; /* Soit actif à l'infini */
+}
+@keyframes label1 { /* augmente la taille à 50% de l'animation et revient à la normale après */
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+label:nth-child(4):hover{ /* Pour selectionner le ènième enfant */
+    animation: label2 3s infinite linear;
+}
+/* Ne pas oublier perpective sur le parent - checkbox-container*/
+@keyframes label2 {
+    33% {  /* a 33% je veux que tu sois comme ça, 66% ... */
+        transform: translateZ(30px);
+    }
+    66% {
+        transform: translateZ(-40px);
+    }
+    100% {
+        transform: translateZ(0);
+    }
+}
+
+.e-mail {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.e-mail input {
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 3px solid transparent;
+    transition: 0.3s;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--color1);
+    /* Definir les différentes possilités en fonction de la taille pour l'input*/
+    min-width: 180px;
+    width: 35%;
+    max-width: 300px;
+}
+
+/* Pseudo classes */
+input[type="text"]:focus { /* QUAND ON CLIQUE DANS l'input*/
+    background: transparent;
+    border: 3px solid var(--color2);
+    border-radius: 150px;
+}
+
+input[type="text"]::placeholder {
+    color: var(--color2);
+    font-family: "Gill Sans","Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    
+}
+
+button {
+    cursor: pointer;
+    background: var(--color2);
+    border: none;
+    font-size: 1.3rem;
+    padding: 10px 20px;
+    border-radius: 150px;
+    margin:0 auto;
+    display: block;
+    transition: 0.1s;
+}
+button:hover {
+    letter-spacing: 3px;
+}
+
+button:active {
+    transform: scale(1.2);
+    background: yellow;
+}
+
+button:hover + a, /* Permet de modifier le comport. de 2 éléments*/
+a:hover  {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+a {
+    color: var(--color2);
+    text-align: center;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: 0.3s;
+}
+a:visited {
+    color: var(--color1);
+}
+
+img {
+    height: 40px;
+    position: absolute;
+    filter: drop-shadow(0px 6px 3px rgba(255, 255, 0, 0.6));
+    z-index: -1;
+    animation: spaceship 15s infinite linear;
+}
+@keyframes spaceship {
+    0% {
+        top: 2%;
+        left: 2%;
+        transform: rotate(90deg);
+    }
+
+    10% {
+        top: 6%;
+        left: 30%;
+        transform: rotate(95deg);
+    }
+
+    20% {
+        top: 9%;
+        left: 60%;
+        transform: rotate(60deg);
+    }
+    30% {
+        top: 0%;
+        left: 80%;
+        transform: rotate(90deg);
+    }
+    40% {
+        top: 20%;
+        left: 120%;
+        transform: rotate(110deg);
+    }
+    50% {
+        top: 50%;
+        left: 80%;
+        transform: rotate(323deg);
+    }
+    60% {
+        top: 90%;
+        left: 90%;
+        transform: rotate(256deg);
+    }
+    70% {
+        top: 110%;
+        left: 50%;
+        transform: rotate(237deg);
+    }
+    80% {
+        top: 85%;
+        left: 30%;
+        transform: rotate(323deg);
+    }
+    90% {
+        top: 50%;
+        left: 15%;
+        transform: rotate(350deg);
+    }
+    100% {
+        top: 2%;
+        left: 2%;
+        transform: rotate(90deg);
+    }
+}
